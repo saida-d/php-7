@@ -1,10 +1,14 @@
 Step 1:
+Change your database details at config/config.php
+============
+Step 2:
 Create a database at your localhost or remote server
 
-Step 2: 
+============
+Step 3: 
 Copy the following queries and run at phpmyadmin (According to your database)
 
-
+============
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `full_name` varchar(128) NOT NULL,
