@@ -6,8 +6,8 @@ class Database{
     public function connect(){
         $conn=@mysql_connect(HOST_NAME,DB_USER,DB_PASSWORD) or die('Connection error!');
         mysql_select_db(DB_NAME) or die('Database error!');
-        if($conn){
-            echo "Connected";
+        if(!$conn){
+            echo "Connection failed";
         }
     }
     
@@ -30,12 +30,34 @@ class Database{
                 return 0;
             } 
     }
+    public function get_user($id){
+        $sql="SELECT * FROM ".TBL_USERS."
+            WHERE id=".$id;
+            $query=mysql_query($sql) or die('Login failed');
+            $record=mysql_fetch_array($query);
+            if(mysql_num_rows($query)>0){
+                return $record;
+            }else{
+                return 0;
+            } 
+    }
 
     public function update($full_name,$password,$id){
-       $sql= "UPDATE ".TBL_USERS." 
-             full_name='".$full_name."'
+       if($password!=''){
+         $sql= "UPDATE ".TBL_USERS." 
+             SET full_name='".$full_name."', 
              user_password='".$password."'
              WHERE id=".$id;    
+       
+       }else{
+          $sql= "UPDATE ".TBL_USERS." 
+             SET full_name='".$full_name."' 
+             WHERE id=".$id;  
+       }
+       $query=mysql_query($sql) or die('Updation failed');
+       if($query){
+           return true;
+       }
     }
     public function delete(){
 
