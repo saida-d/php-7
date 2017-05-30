@@ -12,12 +12,17 @@ class Database{
     }
     
     public function insert($username,$password,$full_name){
+       $check=$this->login($username,$password); 
+       if(!$check){
        $sql="INSERT INTO ".TBL_USERS."(full_name,user_name,user_password)
             VALUES('".$full_name."','".$username."','".$password."')";
             $query=mysql_query($sql) or die('Failed') ;
             if(!$query){
                 return false;
             } 
+       }else{
+           echo "Sorry user already existed on same information ";
+       }
     }
     public function login($username,$password){
       $sql="SELECT * FROM ".TBL_USERS."
@@ -59,8 +64,13 @@ class Database{
            return true;
        }
     }
-    public function delete(){
-
+    public function delete($id){
+        $sql= "DELETE FROM ".TBL_USERS." 
+               WHERE id=".$id;  
+       $query=mysql_query($sql) or die('Deletion failed');
+       if($query){
+           return true;
+       }
     }
 }
 ?>

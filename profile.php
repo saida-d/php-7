@@ -29,12 +29,17 @@
 </div>
 
 <div class="form-group">
-   <button class="btn btn-primary" name="update" type="submit">Update</button>
+   <button class="btn btn-primary" name="update" type="submit">Update</button> 
+   
 </div>
 </form>
 </div>
 
- <div class="col-md-6">
+ <div class="col-md-6 text-right">
+  <form method="post">
+    <button class="btn btn-default" name="delete" type="submit">Delete My Account</button> 
+    <br>Note: No confirm alert on deletion, make sure before you proceed.
+  </form>
   <?php 
   if(isset($_POST['update'])){
 
@@ -51,6 +56,17 @@
          <?php
       }
 
+  }
+  if(isset($_POST['delete'])){
+      $response=$obj->delete($_SESSION['user_id']);
+      if($response){
+         echo "Account deleted successfully";
+         ?>
+         <script>
+          window.location="logout.php";
+         </script>
+         <?php
+      }
   }
 ?>
 

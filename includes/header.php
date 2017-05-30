@@ -1,4 +1,5 @@
 <?php 
+
  include('classes/database.php');
 ?>
 <!DOCTYPE html>
@@ -18,18 +19,6 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<?php 
-  if(isset($_POST['register'])){
-      $obj= new Database();
-      $obj->connect();
-      $full_name=$_POST['name'];
-      $username=$_POST['username'];
-      $password=$_POST['password'];
-
-      $obj->insert($username,$password,$full_name);
-
-  }
-?>
 
   </head>
   <body>

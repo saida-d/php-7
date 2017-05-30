@@ -1,5 +1,6 @@
 <?php 
   include_once('includes/header.php');
+  
  ?>
   <div class="container">
   <?php include_once('includes/navbar.php');?>
@@ -25,6 +26,24 @@
    <button class="btn btn-primary" name="register" type="submit">Register</button>
 </div>
 </form>
+</div>
+
+<div class="col-md-6">
+  <?php 
+  if(isset($_POST['register'])){
+      $obj= new Database();
+      $obj->connect();
+      $full_name=$_POST['name'];
+      $username=$_POST['username'];
+      $password=$_POST['password'];
+
+      $response= $obj->insert($username,$password,$full_name);
+      if(!$response){
+          echo "Registered successfully";
+      }
+
+  }
+  ?>
 </div>
 </div>
  <?php 
