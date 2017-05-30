@@ -38,10 +38,24 @@ class Database{
     public function get_user($id){
         $sql="SELECT * FROM ".TBL_USERS."
             WHERE id=".$id;
-            $query=mysql_query($sql) or die('Login failed');
+            $query=mysql_query($sql) or die('Failed to get user');
             $record=mysql_fetch_array($query);
             if(mysql_num_rows($query)>0){
                 return $record;
+            }else{
+                return 0;
+            } 
+    }
+    public function get_users(){
+        $sql="SELECT * FROM ".TBL_USERS;
+            $query=mysql_query($sql) or die('Failed to list users');
+            
+            if(mysql_num_rows($query)>0){
+               $data=[]; 
+               while($records=mysql_fetch_array($query)){
+                  $data[]=$records;
+               }
+               return $data;
             }else{
                 return 0;
             } 
